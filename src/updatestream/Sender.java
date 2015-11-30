@@ -72,14 +72,19 @@ public class Sender extends Thread {
     }
     
     private void extractPrice(JSONObject response) {
-        int gasStationId = Integer.parseInt(response.get("id").toString());
-        double reg_price = Double.parseDouble(response.get("reg_price").toString());
-        double mid_price = Double.parseDouble(response.get("mid_price").toString());
-        double pre_price = Double.parseDouble(response.get("pre_price").toString());
+        try {
+            int gasStationId = Integer.parseInt(response.get("id").toString());
+            double reg_price = Double.parseDouble(response.get("reg_price").toString());
+            double mid_price = Double.parseDouble(response.get("mid_price").toString());
+            double pre_price = Double.parseDouble(response.get("pre_price").toString());
         
-        checkPrice(gasStationId, "reg", reg_price);
-        checkPrice(gasStationId, "mid", mid_price);
-        checkPrice(gasStationId, "pre", pre_price);
+            checkPrice(gasStationId, "reg", reg_price);
+            checkPrice(gasStationId, "mid", mid_price);
+            checkPrice(gasStationId, "pre", pre_price);
+        }
+        catch (Exception e) {
+            
+        }
     }
     
     private void checkPrice(int gasStationId, String fuelType, double price) {
